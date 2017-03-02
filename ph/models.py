@@ -1,8 +1,23 @@
 from django.db import models
-
 # Create your models here.
 
-class Cluster(models.Model):
+class Base(models.Model):
+    # def __repr__(self):
+    #     return self.to_dict()
+
+    def to_dict(self):
+        opts = self._meta
+        data = {}
+
+        for f in opts.concrete_fields + opts.many_to_many:
+            data[f.name] = f.value_from_object(self)
+
+        return  data
+
+    class Meta:
+        abstract = True
+
+class Cluster(Base):
     name = models.CharField(max_length=100)
     length = models.FloatField(null=False)
     width = models.FloatField(null=False)
@@ -11,7 +26,8 @@ class Cluster(models.Model):
     def __str__(self):
         return self.name + ' | ' + str(self.length) + 'm x ' + str(self.width) + 'm x ' + str(self.height)
 
-class Location(models.Model):
+
+class Location(Base):
     cluster = models.ForeignKey('Cluster', on_delete=models.CASCADE)
     city = models.CharField(max_length=100)
     keywords = models.CharField(max_length=100)
@@ -20,7 +36,7 @@ class Location(models.Model):
     def __str__(self):
         return self.city + ' @ ' + self.cluster.name
 
-class Package(models.Model):
+class Package(Base):
     location = models.ForeignKey('Location', on_delete=models.CASCADE)
     length = models.FloatField(null=False)
     width = models.FloatField(null=False)

@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+
+{% block body_content %}
+
+{% if location %}
+    {% for l in location %}
+        <li>
+            <a href="/app/location/{{ l.id }}"><span>{{ l.keywords }}</span></a>
+        </li>
+    {% endfor %}
+ {% else %}
+    <p>NO LOCATION</p>
+{% endif %}
+
+{% endblock %}

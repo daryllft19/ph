@@ -1,0 +1,33 @@
+{% extends 'app/base.html' %}
+
+{% block body_content %}
+
+{% if cluster %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Length</th>
+                <th>Width</th>
+                <th>Height</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in cluster %}
+            <tr>
+                    <td>{{ c.name }}</td>
+                    <td>{{ c.length }}</td>
+                    <td>{{ c.width }}</td>
+                    <td>{{ c.height }}</td>
+                    <td><a href="/app/cluster/{{ c.id }}">&plus;</a></td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+ {% else %}
+    <p>NO CLUSTER</p>
+{% endif %}
+
+{% endblock %}
