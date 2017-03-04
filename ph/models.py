@@ -52,7 +52,7 @@ class Package(Base):
     is_fragile = models.BooleanField(default=False)
 
     def __str__(self):
-        return 'L:' + str(self.length) + ' | Wi:'+ str(self.width) + ' | H:'+ str(self.height) + ' | We:' + str(self.weight)
+        return 'Cluster:' + str(self.location.cluster_id) + ' | L:' + str(self.length) + ' | Wi:'+ str(self.width) + ' | H:'+ str(self.height) + ' | We:' + str(self.weight)
 
 
 

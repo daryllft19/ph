@@ -13,6 +13,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap/dashboard.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
+    {% block stylesheet %}
+
+    {% endblock %}
 </head>
 <body>
 {% include 'app/header.html' %}
@@ -22,14 +25,16 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Add Cluster <span class="sr-only">(current)</span></a></li>
+            <li><a href="/app">Dashboard</a></li>
+              <li><a href="/app/canvas">View</a></li>
+            <li><a href="/app">Add Cluster</a></li>
             <li><a href="#">Add Location</a></li>
             <li><a href="#">Add Package</a></li>
           </ul>
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
+          <h1 class="page-header">{% block body_header %} {% endblock %}</h1>
         {% block body_content %}
 
         {% endblock %}
@@ -40,6 +45,9 @@
 
 <script src="{% static 'app/js/jquery.min.js' %}"></script>
 <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'app/js/style.js' %}"></script>
+{% block script %}
+{% endblock %}
 
 </body>
 </html>

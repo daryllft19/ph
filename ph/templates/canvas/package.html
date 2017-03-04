@@ -1,0 +1,62 @@
+{% extends 'app/base.html' %}
+{% load staticfiles %}
+
+{% block stylesheet %}
+    <style>
+        #canvas{
+            width:100%;
+            height: 100%;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body_header %}
+View
+{% endblock %}
+
+{% block body_content %}
+
+ {% if package %}
+    {% for p in package %}
+        <li>
+            <a href="#"><span>{{ p.id }}</span></a>
+        </li>
+    {% endfor %}
+ {% else %}
+    <p>NO PACKAGE</p>
+{% endif %}
+
+<canvas id="canvas">
+
+
+</canvas>
+
+{% block script %}
+    <script src="{% static 'app/js/babylon.all.minified.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            var canvas = $('#canvas');
+            var engine = new BABYLON.Engine(canvas, true);
+
+            var creaateScene = function () {
+                var scene = new BABYLON.Scene(engine);
+                scene.clearColor = new BABYLON.Color3.White();
+                var camera = new BABYLON.FreeCamera('cam',
+                    new BABYLON.Vector3(0,0,-10), scene);
+
+                camera.setTarget(BABYLON.Vector3.Zero());
+                var box = BABYLON.Mesh.CreateAlphaTexture('Box', 4.0, scene);
+                return scene;
+            }
+
+            var scene = creaateScene();
+            engine.runRenderLoop(function () {
+                scene.render();
+            });
+        })
+
+    </script>
+{% endblock %}
+
+{% endblock %}

@@ -5,7 +5,8 @@ urlpatterns = [
 
     url(r'^$', views.index, name='index'),
     url(r'^cluster/(?P<cluster_id>[0-9]+)/$', views.cluster, name='cluster'),
-
+    url(r'^canvas/$', views.canvas, name='canvas'),
+    url(r'^canvas/(?P<cluster_id>[0-9]+)/$', views.canvas_package, name='canvas_package'),
 
     url(r'^api/cluster/(?P<cluster_id>[0-9]+)/$', api.cluster, name='cluster'),
     url(r'^api/location/(?P<location_id>[0-9]+)/$', api.location, name='location'),

@@ -1,19 +1,21 @@
 {% extends 'app/base.html' %}
 
 {% block body_header %}
-Dashboard
+View
 {% endblock %}
+
 
 {% block body_content %}
 
-{% if location %}
-    {% for l in location %}
+{% if cluster %}
+    {% for c in cluster %}
         <li>
-            <a href="/app/location/{{ l.id }}"><span>{{ l.keywords }}</span></a>
+            <a href="/app/canvas/{{ c.id }}"><span>{{ c.name }}</span></a>
         </li>
     {% endfor %}
  {% else %}
-    <p>NO LOCATION</p>
+    <p>NO CLUSTERS</p>
 {% endif %}
+
 
 {% endblock %}
